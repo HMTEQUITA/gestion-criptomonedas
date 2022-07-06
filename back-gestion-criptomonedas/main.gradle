@@ -21,6 +21,14 @@ subprojects {
         testCompileOnly  "org.projectlombok:lombok:${lombokVersion}"
         testAnnotationProcessor  "org.projectlombok:lombok:${lombokVersion}"
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+
+
+
+
+    }
+
+    test{
+        useJUnitPlatform()
     }
 
     test.finalizedBy(project.tasks.jacocoTestReport)
@@ -52,6 +60,15 @@ task jacocoMergedReport(type: JacocoReport) {
         xml.enabled true
         csv.enabled false
         html.enabled true
+    }
+    afterEvaluate{
+        classDirectories.setFrom files(classDirectories.files.collect{
+            fileTree(dir: it, exclude:[
+                    'co/com/bancolombia/Mainapplication**',
+                    'co/com/bancolombia/config/**',
+                    'co/com/bancolombia/**/config/**'
+            ])
+        })
     }
 }
 

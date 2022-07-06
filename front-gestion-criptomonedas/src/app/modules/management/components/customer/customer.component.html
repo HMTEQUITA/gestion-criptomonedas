@@ -1,0 +1,26 @@
+<app-header></app-header>
+<pre>
+    {{customerForm.value | json}}
+</pre>
+
+<form [formGroup]="customerForm" (ngSubmit)="search()">
+  <select formControlName="country">
+    <option [ngValue]="null" disabled>Select Country</option>
+    <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
+  </select>
+
+  <button [disabled]="customerForm.invalid" class="btn-primary">Buscar</button>
+</form>
+
+<div class="lista">
+    <table *ngIf="customers">
+        <tr *ngFor="let t of customers">
+          <th>{{ t.id }}</th>
+          <th>{{ t.name }}</th>
+          <th>{{ t.surname }}</th>
+          <button (click)="addCrypto(t.id)" class="btn-primary">Agregar</button>
+        </tr>
+      </table>
+</div>
+
+<app-add-crypto></app-add-crypto>

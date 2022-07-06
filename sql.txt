@@ -1,0 +1,98 @@
+CREATE DATABASE cryptocurrency_management
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8';
+
+CREATE SCHEMA management;
+
+CREATE TABLE management.cryptocurrencies (
+	id smallserial,
+	symbol varchar(5) NOT NULL,
+	name varchar(20) NOT NULL,
+	exchange_rate money NOT NULL,
+	CONSTRAINT cryptocurrencies_pkey PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX uk_cryptocurrencies ON management.cryptocurrencies USING btree (symbol, name);
+
+CREATE TABLE management.exchange (
+	id smallserial,
+	name varchar(50) NOT NULL,
+	CONSTRAINT exchange_pkey PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX uk_exchange ON management.exchange USING btree (name);
+
+
+CREATE TABLE management.countries (
+	id smallserial,
+	name varchar(50) NOT NULL,
+	CONSTRAINT country_pkey PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX uk_countries ON management.countries USING btree (name);
+
+CREATE TABLE management.users (
+	id serial,
+	country_id smallint NOT NULL,
+	name varchar(20) NOT NULL,
+	password varchar(20) NOT NULL,
+	CONSTRAINT user_pkey PRIMARY KEY (id),
+	CONSTRAINT fk_country_id FOREIGN KEY (country_id) REFERENCES management.countries(id)
+);
+
+CREATE UNIQUE INDEX uk_users ON management.users USING btree (name);
+
+
+CREATE TABLE management.roles (
+	id smallserial,
+	name varchar(10) NULL,
+	CONSTRAINT roles_pkey PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX uk_roles ON management.roles USING btree (name);
+
+
+CREATE TABLE management.users_roles (
+	user_id integer NOT NULL,
+	role_id smallint NOT NULL,
+	CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES management.users(id),
+	CONSTRAINT fk_role_id FOREIGN KEY (role_id) REFERENCES management.roles(id)
+);
+
+CREATE UNIQUE INDEX uk_users_roles ON management.users_roles USING btree (user_id , role_id);
+
+
+CREATE TABLE management.country_exchange (
+	country_id smallint NOT NULL,
+	exchange_id smallint NOT NULL,
+	CONSTRAINT fk_country_id FOREIGN KEY (country_id) REFERENCES management.countries(id),
+	CONSTRAINT fk_exchange_id FOREIGN KEY (exchange_id) REFERENCES management.exchange(id)
+);
+
+CREATE UNIQUE INDEX uk_country_exchange ON management.country_exchange USING btree (country_id, exchange_id);
+
+CREATE TABLE management.users_cryptocurrencies (
+	user_id integer NOT NULL,
+	cryptocurrency_id smallint NOT NULL,
+	CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES management.users(id),
+	CONSTRAINT fk_cryptocurrency_id FOREIGN KEY (cryptocurrency_id) REFERENCES management.cryptocurrencies(id)
+);
+
+CREATE UNIQUE INDEX uk_users_cryptocurrencies ON management.users_cryptocurrencies USING btree (user_id, cryptocurrency_id);
+
+CREATE TABLE management.country_cryptocurrencies (
+	country_id smallint NOT NULL,
+	cryptocurrency_id smallint NOT NULL,
+	CONSTRAINT fk_country_id FOREIGN KEY (country_id) REFERENCES management.countries(id),
+	CONSTRAINT fk_cryptocurrency_id FOREIGN KEY (cryptocurrency_id) REFERENCES management.cryptocurrencies(id)
+);
+
+CREATE UNIQUE INDEX uk_country_cryptocurrencies ON management.country_cryptocurrencies USING btree (country_id, cryptocurrency_id);
+
+
+
+
+--
+
+

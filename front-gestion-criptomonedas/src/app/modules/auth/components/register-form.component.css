@@ -1,0 +1,40 @@
+.wrapper-login-form{
+    gap: 2rem;
+    padding: 3rem 0;
+}
+
+.logo{
+    height: 45px;
+}
+
+.logo-icon{
+    font-size: 3rem;
+}
+
+.login-form{
+    background-color: white;
+    padding: 2rem 1rem;
+    box-shadow: var(--box-shadow-1);
+    min-width: 350px;
+    min-height: 320px;
+    max-width: 500px;
+    flex-direction: column;
+}
+
+.login-form .form{
+    padding: 2rem 0;
+    width: 100%;
+    flex-direction: column;
+    gap:1rem;
+    align-items: center;
+}
+
+
+.form-input input{
+    border:solid 2px #DFE1E6;
+    background-color: #FAFBFC;
+    height: 40px;
+    border-radius: var(--border-radius);
+    padding: 0 .5rem;
+    width: 100%;
+}

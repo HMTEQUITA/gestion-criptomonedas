@@ -1,0 +1,37 @@
+<div class="wrapper" *ngIf="showModal$ | async">
+    <div class="new-task">
+        <pre>
+            {{newTask.value | json}}
+        </pre>
+
+        <div *ngIf="customer">
+            <p>Is usuario: {{customer.id}}</p>
+            <p>Nombre usuario: {{customer.name}}</p>
+            <p>Apellido usuario: {{customer.surname}}</p>
+            <p>País usuario: {{customer.country}}</p>
+        
+            <div class="lista">
+                <table *ngIf="customer.cryptocurrencies">
+                    <tr *ngFor="let t of customer.cryptocurrencies">
+                        <th>{{ t.id }}</th>
+                        <th>{{ t.symbol }}</th>
+                        <th>{{ t.name }}</th>
+                        <th>{{ t.exchangeRate }}</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <form [formGroup]="newTask" (ngSubmit)="addCrypto()">
+            <select formControlName="cryptoId">
+                <option [ngValue]="0" >Select Crypto</option>
+                <option *ngFor="let crypto of cryptos" [ngValue]="crypto.id">{{crypto.name}}</option>
+            </select>
+          
+            <div class="form-input">
+                <button class="btn-primary">Guardar</button>
+                <button (click)="cancel()" class="btn-default">Cancelar</button>
+            </div>
+        </form>
+
+    </div>
+</div>

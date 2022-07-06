@@ -1,0 +1,34 @@
+<div class="wrapper-login-form d-flex d-all-center">
+
+
+    <div class="login-form">
+        <div class="d-flex d-all-center">
+            <i class="logo-icon uil uil-apps"></i>
+        </div>
+    
+        <div class="text-label d-flex d-all-center">
+            Iniciar sesión
+        </div>
+
+        <pre>
+            {{loginForm.value | json}}
+        </pre>
+        <form [formGroup]="loginForm" (submit)="sendCredentials()" class="form d-flex">
+            <div class="form-input">
+                <input formControlName="email" 
+                type="text" placeholder="Introduzca el correo electrónico">
+            </div>
+            <div class="form-input">
+                <input formControlName="password" 
+                type="password" placeholder="Introduzca la contraseña">
+            </div>
+            <div class="form-input">
+                <button [disabled]="loginForm.invalid" class="btn-primary">Iniciar sesión</button>
+            </div>
+        </form>
+    </div>
+
+        <!-- <app-register-form></app-register-form> -->
+
+
+</div>

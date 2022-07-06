@@ -1,0 +1,25 @@
+<app-header></app-header>
+<h3>Choose Country</h3>
+<pre>
+    {{cryptoForm.value | json}}
+</pre>
+
+<form [formGroup]="cryptoForm" (ngSubmit)="search()">
+  <select formControlName="country">
+    <option [ngValue]="null" disabled>Select Country</option>
+    <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
+  </select>
+
+  <button [disabled]="cryptoForm.invalid" class="btn-primary">Buscar</button>
+</form>
+
+<div class="lista">
+    <table *ngIf="cryptos">
+        <tr *ngFor="let t of cryptos">
+          <th>{{ t.id }}</th>
+          <th>{{ t.symbol }}</th>
+          <th>{{ t.name }}</th>
+          <th>{{ t.exchangeRate }}</th>
+        </tr>
+      </table>
+</div>

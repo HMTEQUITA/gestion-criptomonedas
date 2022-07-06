@@ -1,0 +1,81 @@
+--insert gestoras
+INSERT INTO management.exchange (name) VALUES('Coinbase');
+INSERT INTO management.exchange (name) VALUES('eToro');
+INSERT INTO management.exchange (name) VALUES('Binance');
+INSERT INTO management.exchange (name) VALUES('iBroker');
+INSERT INTO management.exchange (name) VALUES('Bitpanda');
+
+--insert paises
+INSERT INTO management.countries(name) VALUES('Colombia');
+INSERT INTO management.countries(name) VALUES('Venezuela');
+INSERT INTO management.countries(name) VALUES('Ecuador');
+INSERT INTO management.countries(name) VALUES('Chile');
+INSERT INTO management.countries(name) VALUES('Argentina');
+
+--insert criptomonedas -> OK
+INSERT INTO management.cryptocurrencies (symbol, name, exchange_rate) VALUES('BTC', 'Bitcoin', '115615488.4');
+INSERT INTO management.cryptocurrencies (symbol, name, exchange_rate) VALUES('ETH', 'Ethereum', '7852189.03');
+INSERT INTO management.cryptocurrencies (symbol, name, exchange_rate) VALUES('USDT', 'Tether', '3961.3483');
+INSERT INTO management.cryptocurrencies (symbol, name, exchange_rate) VALUES('ADA', 'Cardano', '2040.7186');
+INSERT INTO management.cryptocurrencies (symbol, name, exchange_rate) VALUES('SOL', 'Solana', '196133.312');
+INSERT INTO management.cryptocurrencies (symbol, name, exchange_rate) VALUES('DOT', 'Polkadot', '39633.3');
+INSERT INTO management.cryptocurrencies (symbol, name, exchange_rate) VALUES('DOGE', 'Dogecoin', '331.576151');
+INSERT INTO management.cryptocurrencies (symbol, name, exchange_rate) VALUES('ATOM', 'Cosmos', '44587.0662');
+INSERT INTO management.cryptocurrencies (symbol, name, exchange_rate) VALUES('USDC', 'USD Coin', '3968.0860');
+INSERT INTO management.cryptocurrencies (symbol, name, exchange_rate) VALUES('XRP', 'XRP', '1625.75797');
+INSERT INTO management.cryptocurrencies (symbol, name, exchange_rate) VALUES('MATIC', 'Polygon', '2556.348');
+
+--insert usuario
+INSERT INTO administracion.usuarios
+(id_pais, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, clave)
+VALUES(1, 'Hector', 'Mauricio', 'Tequita', 'Robayo', 'Root123456*');
+INSERT INTO administracion.usuarios
+(id_pais, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, clave)
+VALUES(5, 'Luisa', 'Fernanda', 'Lopez', 'Cruz', 'Root123456*');
+
+--insert gestoras por pais
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(1, 1);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(1, 2);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(1, 3);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(2, 1);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(2, 2);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(2, 4);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(3, 1);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(3, 3);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(3, 4);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(4, 1);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(4, 2);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(4, 5);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(5, 1);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(5, 2);
+INSERT INTO management.country_exchange (country_id, exchange_id) VALUES(5, 3);
+
+--insert criptomonedas por pais
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(1, 1);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(1, 2);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(1, 3);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(1, 4);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(2, 1);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(2, 2);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(2, 5);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(2, 6);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(3, 1);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(3, 2);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(3, 5);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(3, 6);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(4, 1);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(4, 2);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(4, 7);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(4, 8);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(5, 1);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(5, 2);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(5, 9);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(5, 10);
+INSERT INTO management.country_cryptocurrencies (country_id, cryptocurrenciy_id) VALUES(5, 11);
+
+--insert criptomonedas por usuario
+INSERT INTO administracion.criptomonedas_por_usuario (id_usuario, id_criptomoneda)
+VALUES(1, 1);
+
+INSERT INTO administracion.criptomonedas_por_usuario (id_usuario, id_criptomoneda)
+VALUES(2, 1);

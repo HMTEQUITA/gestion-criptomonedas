@@ -11,6 +11,11 @@ import co.com.bancolombia.security.model.User;
 import co.com.bancolombia.securitymodule.usecase.AuthenticationUseCase;
 import co.com.bancolombia.securitymodule.usecase.RoleUseCase;
 import co.com.bancolombia.securitymodule.usecase.UserUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,15 +32,29 @@ public class AuthController {
     private final CountryUseCase countryUseCase;
     private final RoleUseCase roleUseCase;
 
+    @Operation(summary = "Login user>")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Token",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = JwtResponseVO.class)) }),
+            @ApiResponse(responseCode = "400", description = "Bad credentials",
+                    content = @Content) })
     @PostMapping("/signin")
     public ResponseEntity<JwtResponseVO> authenticateUser(@Validated @RequestBody CredentialVO credentialVO) {
-        var credential = CredentialMapper.credential(credentialVO);
+        var credential = CredentialMapper.toDTO(credentialVO);
         var jwtResponse = authenticate.getJwtResponse(credential);
         return ResponseEntity.ok(JwtMapper.jwtResponseVO(jwtResponse));
     }
 
+    @Operation(summary = "Register user>")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User created successfully",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class)) }),
+            @ApiResponse(responseCode = "400", description = "User already exists",
+                    content = @Content) })
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Validated @RequestBody UserVO userVO) {
+    public ResponseEntity<String> registerUser(@Validated @RequestBody UserVO userVO) {
         User user = User.builder()
                 .email(userVO.getEmail())
                 .password(authenticate.getEncodePassword(userVO.getPassword()))

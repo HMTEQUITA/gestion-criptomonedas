@@ -5,10 +5,12 @@ import co.com.bancolombia.customer.view.CustomerView;
 import co.com.bancolombia.jpa.country.mapper.CountryTransformer;
 import co.com.bancolombia.jpa.cryptocurrency.mapper.CryptoTransformer;
 import co.com.bancolombia.jpa.customer.entity.CustomerEntity;
+import lombok.NoArgsConstructor;
 
 import java.util.stream.Collectors;
 
-public class CustomerTransformer {
+@NoArgsConstructor
+public final class CustomerTransformer {
 
     public static Customer toDto(CustomerEntity customerEntity) {
         return Customer.builder()
@@ -43,6 +45,7 @@ public class CustomerTransformer {
                 .id(customerEntity.getId())
                 .name(customerEntity.getName())
                 .surname(customerEntity.getSurname())
+                .country(customerEntity.getCountry().getName())
                 .build();
     }
 }

@@ -33,10 +33,26 @@ class CryptocurrencyUseCaseTest {
     }
 
     @Test
+    void getCryptocurrenciesExceptionTest(){
+        List<Cryptocurrency> cryptocurrencies = List.of();
+        Mockito.when(cryptocurrencyRepository.findAll()).thenReturn(cryptocurrencies);
+        Assertions.assertThrows(DomainException.class,
+                () -> cryptocurrencyUseCase.getCryptocurrencies());
+    }
+
+    @Test
     void getCryptocurrenciesByCountryTest(){
         List<Cryptocurrency> cryptocurrencies = List.of(Cryptocurrency.builder().build());
         Mockito.when(cryptocurrencyRepository.findByCountry(1)).thenReturn(cryptocurrencies);
         Assertions.assertNotNull(cryptocurrencyUseCase.getCryptocurrenciesByCountry(1));
+    }
+
+    @Test
+    void getCryptocurrenciesByCountryExceptionTest(){
+        List<Cryptocurrency> cryptocurrencies = List.of();
+        Mockito.when(cryptocurrencyRepository.findByCountry(1)).thenReturn(cryptocurrencies);
+        Assertions.assertThrows(DomainException.class,
+                () ->cryptocurrencyUseCase.getCryptocurrenciesByCountry(1));
     }
 
     @Test
@@ -46,6 +62,13 @@ class CryptocurrencyUseCaseTest {
         Assertions.assertNotNull(cryptocurrencyUseCase.getCryptocurrenciesByCustomer(1L));
     }
 
+    @Test
+    void getCryptocurrenciesByCustomerExceptionTest(){
+        List<Cryptocurrency> cryptocurrencies = List.of();
+        Mockito.when(cryptocurrencyRepository.findByCustomer(1L)).thenReturn(cryptocurrencies);
+        Assertions.assertThrows(DomainException.class,
+                () -> cryptocurrencyUseCase.getCryptocurrenciesByCustomer(1L));
+    }
 
     @Test
     void getByIdAndCountryIdTest(){

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Service
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -23,12 +22,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
             User user = userRepository.findByUserName(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
-
+/*
             List<GrantedAuthority> authorities = user.getRoles()
                     .stream()
                     .map(role -> new SimpleGrantedAuthority(role.getName()))
                     .collect(Collectors.toList());
-
+*/
             return  UserDetailsImpl.build(user);
         }
 }

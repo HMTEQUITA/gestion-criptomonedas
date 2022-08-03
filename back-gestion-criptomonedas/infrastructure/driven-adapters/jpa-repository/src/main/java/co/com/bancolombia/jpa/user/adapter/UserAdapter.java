@@ -14,9 +14,7 @@ import java.util.Optional;
 @Repository
 @AllArgsConstructor
 public class UserAdapter implements UserRepository {
-
     private final UserRepositoryAdapter repository;
-
     @Override
     @Transactional
     public Optional<User> findByUserName(String userName) {

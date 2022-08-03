@@ -2,8 +2,10 @@ package co.com.bancolombia.jpa.cryptocurrency.mapper;
 
 import co.com.bancolombia.jpa.cryptocurrency.entity.CryptocurrencyEntity;
 import co.com.bancolombia.cryptocurrency.model.Cryptocurrency;
+import lombok.NoArgsConstructor;
 
-public class CryptoTransformer {
+@NoArgsConstructor
+public final class CryptoTransformer {
 
     public static Cryptocurrency toDto(CryptocurrencyEntity cryptocurrency){
         return Cryptocurrency.builder()

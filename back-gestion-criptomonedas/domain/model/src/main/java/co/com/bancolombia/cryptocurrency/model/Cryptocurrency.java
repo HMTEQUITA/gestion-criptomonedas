@@ -3,6 +3,7 @@ import lombok.*;
 
 @Getter
 @Builder(toBuilder = true)
+@EqualsAndHashCode
 public class Cryptocurrency {
     private final Integer id;
     private final String symbol;

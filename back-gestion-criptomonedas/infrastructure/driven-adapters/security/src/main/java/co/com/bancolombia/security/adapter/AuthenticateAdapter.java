@@ -1,5 +1,7 @@
 package co.com.bancolombia.security.adapter;
 
+import co.com.bancolombia.execption.enums.DomainExceptionEnum;
+import co.com.bancolombia.execption.execptions.DomainException;
 import co.com.bancolombia.security.model.JwtResponse;
 import co.com.bancolombia.security.model.JwtResponseRepository;
 import co.com.bancolombia.security.jwt.JwtUtils;
@@ -7,6 +9,7 @@ import co.com.bancolombia.security.payload.Credential;
 import co.com.bancolombia.security.service.UserDetailsImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,23 +30,26 @@ public class AuthenticateAdapter implements JwtResponseRepository {
 
     @Override
     public JwtResponse getJwtResponse(Credential user) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+        String jwt = null;
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            jwt = jwtUtils.generateJwtToken(authentication);
+
+            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+            List<String> roles = userDetails.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList());
+
+        }catch (BadCredentialsException e){
+            throw new DomainException(DomainExceptionEnum.BAD_CREDENTIALS_EXCEPTION);
+        }
 
         return JwtResponse.builder()
                 .token(jwt)
-                //.type("Bearer")
-                //.id(userDetails.getId())
-               // .username(userDetails.getUsername())
-                //.roles(roles)
                 .build();
     }
 

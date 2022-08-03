@@ -20,6 +20,10 @@ public class CountryUseCase {
     }
 
     public List<CountryView> getCountries(){
-        return countryRepository.getViewCountries();
+        List<CountryView> countries = countryRepository.getViewCountries();
+        if (countries.isEmpty()){
+            throw new DomainException(DomainExceptionEnum.NOT_FOUND_COUNTRIES_EXCEPTION);
+        }
+        return countries;
     }
 }

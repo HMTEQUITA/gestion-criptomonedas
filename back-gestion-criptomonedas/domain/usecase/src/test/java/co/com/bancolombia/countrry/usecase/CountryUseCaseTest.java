@@ -2,6 +2,7 @@ package co.com.bancolombia.countrry.usecase;
 
 import co.com.bancolombia.country.model.Country;
 import co.com.bancolombia.country.model.CountryRepository;
+import co.com.bancolombia.country.view.CountryView;
 import co.com.bancolombia.execption.execptions.DomainException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -40,10 +41,25 @@ class CountryUseCaseTest {
     }
 
     @Test
-    void getCountriesTest(){
-        List<Country> country = List.of(Country.builder().build());
-        Mockito.when(countryRepository.getCountries()).thenReturn(country);
+    void getCountriesTest() {
+        List<CountryView> country = List.of(this.country());
+        Mockito.when(countryRepository.getViewCountries()).thenReturn(country);
         Assertions.assertNotNull(countryUseCase.getCountries());
+    }
+
+    @Test
+    void getCountriesExceptionTest(){
+        List<CountryView> country = List.of();
+        Mockito.when(countryRepository.getViewCountries()).thenReturn(country);
+        Assertions.assertThrows(DomainException.class,
+                () -> countryUseCase.getCountries());
+    }
+
+    private CountryView country(){
+        return CountryView.builder()
+                .id(1)
+                .name("colombia")
+                .build();
     }
 
 }

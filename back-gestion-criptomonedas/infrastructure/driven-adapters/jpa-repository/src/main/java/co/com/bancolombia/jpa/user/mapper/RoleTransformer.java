@@ -2,8 +2,10 @@ package co.com.bancolombia.jpa.user.mapper;
 
 import co.com.bancolombia.jpa.user.entity.RoleEntity;
 import co.com.bancolombia.security.model.Role;
+import lombok.NoArgsConstructor;
 
-public class RoleTransformer {
+@NoArgsConstructor
+public final class RoleTransformer {
 
     public static Role toDto(RoleEntity roleEntity){
         return Role.builder()

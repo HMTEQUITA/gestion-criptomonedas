@@ -1,5 +1,6 @@
 package co.com.bancolombia.customer.usecase;
 
+import co.com.bancolombia.country.model.Country;
 import co.com.bancolombia.cryptocurrency.model.Cryptocurrency;
 import co.com.bancolombia.customer.model.Customer;
 import co.com.bancolombia.customer.model.CustomerRepository;
@@ -13,10 +14,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Set;
 
 @ExtendWith(SpringExtension.class)
 class CustomerUseCaseTest {
@@ -43,11 +44,37 @@ class CustomerUseCaseTest {
     }
 
     @Test
-    void updateCryptocurrencyTest(){
+    void addCryptocurrencyTest(){
         Customer customer = Customer.builder().build();
-        Cryptocurrency cryptocurrency = Cryptocurrency.builder().build();
+        Cryptocurrency cryptocurrency = this.cryptocurrency();
         Mockito.when(customerRepository.save(customer)).thenReturn(customer);
-        Assertions.assertNotNull(customerUseCase.updateCryptocurrency(customer, cryptocurrency));
+        Assertions.assertNotNull(customerUseCase.addCryptocurrency(customer, cryptocurrency));
+    }
+
+    @Test
+    void addCryptocurrencyExceptionTest(){
+        Customer customer = this.customer();
+        Cryptocurrency cryptocurrency = this.cryptocurrency();
+        Mockito.when(customerRepository.save(customer)).thenReturn(customer);
+        Assertions.assertThrows(DomainException.class,
+                () -> customerUseCase.addCryptocurrency(customer, cryptocurrency));
+    }
+
+    @Test
+    void removeCryptocurrencyTest(){
+        Customer customer = this.customer();
+        Cryptocurrency cryptocurrency = this.cryptocurrency();
+        Mockito.when(customerRepository.save(customer)).thenReturn(customer);
+        Assertions.assertNotNull(customerUseCase.removeCryptocurrency(customer, cryptocurrency));
+    }
+
+    @Test
+    void removeCryptocurrencyExceptionTest(){
+        Customer customer = Customer.builder().build();
+        Cryptocurrency cryptocurrency = this.cryptocurrency();
+        Mockito.when(customerRepository.save(customer)).thenReturn(customer);
+        Assertions.assertThrows(DomainException.class,
+                () -> customerUseCase.removeCryptocurrency(customer, cryptocurrency));
     }
 
     @Test
@@ -58,10 +85,49 @@ class CustomerUseCaseTest {
     }
 
     @Test
+    void getCustomersExceptionTest(){
+        List<CustomerView> customer = List.of();
+        Mockito.when(customerRepository.getCustomers()).thenReturn(customer);
+        Assertions.assertThrows(DomainException.class,
+                () -> customerUseCase.getCustomers());
+    }
+
+
+    @Test
     void getCustomerByCountryTest(){
         List<CustomerView> customer = List.of(CustomerView.builder().build());
         Mockito.when(customerRepository.getCustomerByCountry(1)).thenReturn(customer);
         Assertions.assertNotNull(customerUseCase.getCustomerByCountry(1));
+    }
+
+    @Test
+    void getCustomerByCountryExceptionTest(){
+        List<CustomerView> customer = List.of();
+        Mockito.when(customerRepository.getCustomerByCountry(1)).thenReturn(customer);
+        Assertions.assertThrows(DomainException.class,
+                () -> customerUseCase.getCustomerByCountry(1));
+    }
+
+
+    private Customer customer(){
+        Set<Cryptocurrency> cryptocurrency = new HashSet<>();
+        cryptocurrency.add(this.cryptocurrency());
+        return Customer.builder()
+                .id(1L)
+                .name("name")
+                .surname("surname")
+                .country(Country.builder().build())
+                .cryptocurrencies(cryptocurrency)
+                .build();
+    }
+
+    private Cryptocurrency cryptocurrency(){
+        return Cryptocurrency.builder()
+                .id(1)
+                .name("name")
+                .symbol("symbol")
+                .exchangeRate(10.0)
+                .build();
     }
 
 }

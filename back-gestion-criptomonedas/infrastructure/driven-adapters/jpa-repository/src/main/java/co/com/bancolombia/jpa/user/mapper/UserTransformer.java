@@ -3,10 +3,12 @@ package co.com.bancolombia.jpa.user.mapper;
 import co.com.bancolombia.jpa.customer.mapper.CustomerTransformer;
 import co.com.bancolombia.jpa.user.entity.UserEntity;
 import co.com.bancolombia.security.model.User;
+import lombok.NoArgsConstructor;
 
 import java.util.stream.Collectors;
 
-public class UserTransformer {
+@NoArgsConstructor
+public final class UserTransformer {
 
     public static User toDto(UserEntity userEntity){
         return User.builder()

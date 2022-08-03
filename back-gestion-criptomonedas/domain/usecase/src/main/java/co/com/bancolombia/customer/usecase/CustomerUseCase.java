@@ -20,17 +20,44 @@ public class CustomerUseCase {
                 .orElseThrow(() ->  new DomainException(DomainExceptionEnum.NOT_FOUND_CUSTOMER_EXCEPTION));
     }
 
-    public Customer updateCryptocurrency(Customer customer, Cryptocurrency cryptocurrency){
+    public Customer addCryptocurrency(Customer customer, Cryptocurrency cryptocurrency){
+        boolean isPresent = customer.getCryptocurrencies().stream()
+                .anyMatch(c ->  c.getId().equals(cryptocurrency.getId()));
+
+        if(isPresent){
+            throw new DomainException(DomainExceptionEnum.CRYPTO_CURRENCY_ALREADY_EXIST);
+        }
+
         customer.getCryptocurrencies().add(cryptocurrency);
+
         return customerRepository.save(customer);
     }
 
+    public Customer removeCryptocurrency(Customer customer, Cryptocurrency cryptocurrency){
+        customer.getCryptocurrencies()
+                .stream()
+                .filter(c -> c.getId().equals(cryptocurrency.getId()))
+                .findFirst()
+                .orElseThrow(() -> new DomainException(DomainExceptionEnum.CRYPTO_CURRENCY_NOT_EXIST));
+
+        customer.getCryptocurrencies().remove(cryptocurrency);
+
+        return customerRepository.save(customer);
+    }
 
     public List<CustomerView> getCustomers(){
+        List<CustomerView> customers = customerRepository.getCustomers();
+        if(customers.isEmpty()){
+            throw new DomainException(DomainExceptionEnum.NOT_FOUND_CUSTOMERS_EXCEPTION);
+        }
         return customerRepository.getCustomers();
     }
     public List<CustomerView> getCustomerByCountry(Integer id){
-        return customerRepository.getCustomerByCountry(id);
+        List<CustomerView> customers = customerRepository.getCustomerByCountry(id);;
+        if(customers.isEmpty()){
+            throw new DomainException(DomainExceptionEnum.NOT_FOUND_CUSTOMERS_EXCEPTION);
+        }
+        return customers;
     }
 
 }

@@ -1,7 +1,6 @@
 package co.com.bancolombia.api.customer.controller;
 
 import co.com.bancolombia.api.country.controller.CountryController;
-import co.com.bancolombia.api.cryptocurrency.dto.CryptocurrencyVO;
 import co.com.bancolombia.api.customer.dto.CustomerVO;
 import co.com.bancolombia.api.customer.view.CustomerViewDTO;
 import co.com.bancolombia.api.exception.HandlerException;
@@ -96,14 +95,36 @@ class CustomerControllerTest {
         Mockito.when(cryptocurrencyUseCase.getByIdAndCountryId(cryptocurrencyId, 1))
                 .thenReturn(cryptocurrency);
 
-        Mockito.when(customerUseCase.updateCryptocurrency(customer, cryptocurrency)).thenReturn(customer);
+        Mockito.when(customerUseCase.addCryptocurrency(customer, cryptocurrency)).thenReturn(customer);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/customers/"+customerId+"/cryptocurrency/"+cryptocurrencyId)
+        mockMvc.perform(MockMvcRequestBuilders.get("/customers/"+customerId+"/add_cryptocurrency/"+cryptocurrencyId)
                         .content(objectMapper.writeValueAsString(CustomerVO.builder().build()))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
+    @Test
+    void removeCryptocurrencyTest() throws Exception{
+        long customerId = 1L;
+        int cryptocurrencyId = 1;
+
+        Customer customer = this.customer();
+        Cryptocurrency cryptocurrency = this.cryptocurrency();
+
+        Mockito.when(customerUseCase.getCustomerById(customer.getId()))
+                .thenReturn(customer);
+
+        Mockito.when(cryptocurrencyUseCase.getByIdAndCountryId(cryptocurrencyId, 1))
+                .thenReturn(cryptocurrency);
+
+        Mockito.when(customerUseCase.removeCryptocurrency(customer, cryptocurrency)).thenReturn(customer);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/customers/"+customerId+"/remove_cryptocurrency/"+cryptocurrencyId)
+                        .content(objectMapper.writeValueAsString(CustomerVO.builder().build()))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 
     public Customer customer(){
         return Customer.builder()

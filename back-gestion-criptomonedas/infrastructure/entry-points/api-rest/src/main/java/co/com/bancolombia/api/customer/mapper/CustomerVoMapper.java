@@ -46,6 +46,7 @@ public final class CustomerVoMapper {
                 .id(customerView.getId())
                 .name(customerView.getName())
                 .surname(customerView.getSurname())
+                .country(customerView.getCountry())
                 .build();
     }
 }

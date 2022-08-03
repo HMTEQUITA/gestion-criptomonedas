@@ -11,7 +11,7 @@ subprojects {
     apply plugin: 'jacoco'
     apply plugin: 'io.spring.dependency-management'
 
-    compileJava.dependsOn validateStructure
+//    compileJava.dependsOn validateStructure
     sourceCompatibility = JavaVersion.VERSION_11
 
     dependencies {
@@ -22,9 +22,7 @@ subprojects {
         testAnnotationProcessor  "org.projectlombok:lombok:${lombokVersion}"
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
 
-
-
-
+        implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
     }
 
     test{

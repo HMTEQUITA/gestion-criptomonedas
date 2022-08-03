@@ -15,15 +15,27 @@ public class CryptocurrencyUseCase {
     private final CryptocurrencyRepository cryptocurrencyRepository;
 
     public List<Cryptocurrency> getCryptocurrencies(){
-        return cryptocurrencyRepository.findAll();
+        List<Cryptocurrency> cryptocurrencies= cryptocurrencyRepository.findAll();
+        if(cryptocurrencies.isEmpty()){
+            throw new DomainException(DomainExceptionEnum.NOT_FOUND_CRYPTOCURRENCIES_EXCEPTION);
+        }
+        return  cryptocurrencies;
     }
 
     public List<Cryptocurrency> getCryptocurrenciesByCountry(Integer countryId){
-        return cryptocurrencyRepository.findByCountry(countryId);
+        List<Cryptocurrency> cryptocurrencies = cryptocurrencyRepository.findByCountry(countryId);
+        if(cryptocurrencies.isEmpty()){
+            throw new DomainException(DomainExceptionEnum.NOT_FOUND_CRYPTOCURRENCIES_EXCEPTION);
+        }
+        return  cryptocurrencies;
     }
 
     public List<Cryptocurrency> getCryptocurrenciesByCustomer(Long customerId){
-        return cryptocurrencyRepository.findByCustomer(customerId);
+        List<Cryptocurrency> cryptocurrencies = cryptocurrencyRepository.findByCustomer(customerId);
+        if(cryptocurrencies.isEmpty()){
+            throw new DomainException(DomainExceptionEnum.NOT_FOUND_CRYPTOCURRENCIES_EXCEPTION);
+        }
+        return cryptocurrencies;
     }
 
     public Cryptocurrency getByIdAndCountryId(Integer cryptoId, Integer countryId){

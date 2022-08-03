@@ -41,7 +41,7 @@ public class CustomerAdapter implements CustomerRepository {
     }
     @Override
     public List<CustomerView> getCustomerByCountry(Integer id) {
-        return repository.findByCountryId(id)
+            return repository.findByCountryId(id)
                 .stream()
                 .map(CustomerTransformer::toView)
                 .collect(Collectors.toList());

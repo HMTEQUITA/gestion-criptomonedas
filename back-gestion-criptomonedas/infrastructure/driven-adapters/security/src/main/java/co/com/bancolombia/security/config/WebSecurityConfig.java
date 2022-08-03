@@ -50,16 +50,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+        http.cors().and().csrf().disable();
+        /*        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/auth/**", "/countries/**").permitAll()
+                .antMatchers("/v2/api-docs/**","/v3/api-docs/**", "/v1/api-docs/**",
+                        "/api-docs/**",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/swagger-ui/**").permitAll()
                 .antMatchers("/customers/**", "/cryptocurrencies/**", "/exchanges/**"
                         ).hasRole("ADMIN")
                // .authorizeRequests().antMatchers("/**").permitAll()
-                .antMatchers("/api/test/**").permitAll()
-                .anyRequest().authenticated();
-
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+              //  .antMatchers("/api/test/**").permitAll()
+              //  .anyRequest().authenticated();
+*/
+      //  http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }

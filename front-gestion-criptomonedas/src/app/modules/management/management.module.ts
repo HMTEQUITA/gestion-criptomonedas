@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExchangeComponent } from './components/exchange/exchange.component';
 import { CryptocurrencyComponent } from './components/cryptocurrency/cryptocurrency.component';
 import { AddCryptoComponent } from './components/add-crypto/add-crypto.component';
+import { HomeComponent } from './components/home/home/home.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { AddCryptoComponent } from './components/add-crypto/add-crypto.component
     ExchangeComponent,
     CryptocurrencyComponent,
     AddCryptoComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,

@@ -1,37 +1,60 @@
 <div class="wrapper" *ngIf="showModal$ | async">
-    <div class="new-task">
-        <pre>
-            {{newTask.value | json}}
-        </pre>
+    
 
-        <div *ngIf="customer">
-            <p>Is usuario: {{customer.id}}</p>
-            <p>Nombre usuario: {{customer.name}}</p>
-            <p>Apellido usuario: {{customer.surname}}</p>
-            <p>País usuario: {{customer.country}}</p>
-        
-            <div class="lista">
-                <table *ngIf="customer.cryptocurrencies">
-                    <tr *ngFor="let t of customer.cryptocurrencies">
-                        <th>{{ t.id }}</th>
-                        <th>{{ t.symbol }}</th>
-                        <th>{{ t.name }}</th>
-                        <th>{{ t.exchangeRate }}</th>
+    <div class="new-task">
+
+        <div class="title">
+            <h1>Detalle Usuario</h1>
+        </div>
+
+        <div class="datail-customer" *ngIf="customer">
+            <div class="datail-customer-info">
+                <p class="p-customer">Nombres: {{customer.name}}</p>
+                <p class="p-customer">Apellidos: {{customer.surname}}</p>
+                <p class="p-customer">País: {{customer.country}}</p>
+            </div>
+
+            <div class="list-table" *ngIf="customer.cryptocurrencies">
+                <table class="table" >
+                  <thead>
+                    <th style="width:5%">ID</th>
+                    <th style="width:30%">Simbolo</th>
+                    <th style="width:30%">Nombre</th>
+                    <th style="width:20%">Valor</th>
+                    <th style="width:5%">Eliminar</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let t of customer.cryptocurrencies">       
+                        <td>{{ t.id }}</td>
+                        <td>{{ t.symbol }}</td>
+                        <td>{{ t.name }}</td>
+                        <td>{{ t.exchangeRate | currency: 'USD' }}</td>
+                        <td style="text-align: center">
+                            <img class="icon" (click)="removeCrypto(t.id)" src ="../../../../../assets/icons/eliminar.png">
+                        </td>
                     </tr>
+                  </tbody>
                 </table>
             </div>
         </div>
-        <form [formGroup]="newTask" (ngSubmit)="addCrypto()">
-            <select formControlName="cryptoId">
-                <option [ngValue]="0" >Select Crypto</option>
-                <option *ngFor="let crypto of cryptos" [ngValue]="crypto.id">{{crypto.name}}</option>
-            </select>
-          
-            <div class="form-input">
-                <button class="btn-primary">Guardar</button>
-                <button (click)="cancel()" class="btn-default">Cancelar</button>
-            </div>
-        </form>
+
+        <div class="addcrypto-form"> 
+            <form [formGroup]="newTask" (ngSubmit)="addCrypto()" >
+                <div class="form-input">
+                    <select formControlName="crypto" class="form-select">
+                        <option [ngValue]="null" >Seleccione Criptomoneda</option>
+                        <option *ngFor="let crypto of cryptos" [ngValue]="crypto">{{crypto.name}}</option>
+                    </select>
+                </div>
+
+                <div class="form-input">
+                    <button [disabled]="newTask.invalid" class="btn-primary">Agregar</button>
+                </div>
+                <div class="form-input">
+                    <button (click)="cancel()" class="btn-cancel">Salir</button>
+                </div>
+            </form>
+        </div>
 
     </div>
 </div>

@@ -29,7 +29,7 @@ export class ExchangeComponent implements OnInit {
     });
 
     this.exchangeForm = new FormGroup({
-      country: new FormControl(this.countries[0]),
+      country: new FormControl(null, [Validators.required]),
     })
   }
 

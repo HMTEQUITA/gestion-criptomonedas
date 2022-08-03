@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, TitleStrategy } from '@angular/router';
 import { CountryInterface } from '@core/models/country.interface';
 import { CustomerInterface } from '@core/models/customer.interface';
@@ -29,7 +29,7 @@ export class CustomerComponent implements OnInit {
       });
 
       this.customerForm = new FormGroup({
-        country: new FormControl(this.countries[0]),
+        country: new FormControl(null, [Validators.required]),
       })
     }
 

@@ -17,6 +17,12 @@
     gap: 5rem;
 }
 
+.navbar .logo {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+}
+
 .navbar .menu ul {
     position: relative;
     height: var(--navbarHeight);
@@ -28,58 +34,60 @@
 }
 
 .navbar .menu ul li {
-    cursor: pointer;
-    border-bottom: solid 1px transparent;
     height: 100%;
     font-weight: 600;
-    opacity: .5;
     display: flex;
     justify-content: center;
     align-content: center;
     align-items: center;
+}
+
+.navbar .menu a {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 16px;
+    text-decoration: none;
+}
+
+.header-menu_link{
+    position: relative;
+    display: block;
+    color: #2C2A29;    
 }
 
 .navbar .menu ul li:hover {
-    opacity: .8;
+    border-bottom: 3px solid var(--color-6);
 }
 
-.navbar .menu ul li.active {
-    border-bottom: solid 2px var(--color-1);
-    opacity: 1;
+.active-link{
+    border-bottom: 3px solid var(--color-6);
 }
 
-.navbar .logo {
-    font-size: 25px;
-    font-weight: 600;
+.navbar .logout:hover {
+    background-color: var(--color-6);
 }
 
-.user-section {
-    gap: 1.5rem;
-}
-
-.user-section .notifications .uil {
-    font-size: 28px;
-}
-
-.user-section .notifications .count {
-    position: absolute;
-    background-color: var(--color-1);
-    font-size: 70%;
-    width: 16px;
-    height: 14px;
-    text-align: center;
+.logout{
+    cursor: pointer;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    align-content: center;
-    border-radius: 8px;
-    color: white;
-    border: solid 2px white
+    flex-direction: column;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-.user-section .avatar img {
-    width: 35px;
-    height: 35px;
-    border-radius: 10px;
-    object-fit: cover;
+.logout sub{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.icon-logout{
+    align-items: center;
+    width: 20px;
+    height: 20px;
 }

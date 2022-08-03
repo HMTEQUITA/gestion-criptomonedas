@@ -21,13 +21,12 @@ export class ValidateSessionGuard implements CanActivate {
     return this.checkCookie();
   }
 
-  private checkCookie():boolean{ 
-    console.log(this.cookieService.getAll)
-    if(!this.cookie){
+  private checkCookie():boolean{
+    if(!this.cookieService.get('token_session')){
+      console.log('redirecion al login')
       this.router.navigate(['/','auth','login'])
       return false;
     }
-    
     return true;
   }
   

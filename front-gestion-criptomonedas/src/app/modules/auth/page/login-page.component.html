@@ -1,4 +1,4 @@
-<div class="wrapper-login-form d-flex d-all-center">
+<div class="wrapper-search-form d-flex d-all-center">
 
 
     <div class="login-form">
@@ -9,10 +9,6 @@
         <div class="text-label d-flex d-all-center">
             Iniciar sesión
         </div>
-
-        <pre>
-            {{loginForm.value | json}}
-        </pre>
         <form [formGroup]="loginForm" (submit)="sendCredentials()" class="form d-flex">
             <div class="form-input">
                 <input formControlName="email" 

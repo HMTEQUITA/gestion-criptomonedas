@@ -3,20 +3,13 @@
     padding: 3rem 0;
 }
 
-.logo{
-    height: 45px;
-}
-
-.logo-icon{
-    font-size: 3rem;
-}
-
 .login-form{
     background-color: white;
     padding: 2rem 1rem;
     box-shadow: var(--box-shadow-1);
+    border-radius: var(--border-radius-forms);
     min-width: 350px;
-    min-height: 320px;
+    min-height: 150px;
     max-width: 500px;
     flex-direction: column;
 }

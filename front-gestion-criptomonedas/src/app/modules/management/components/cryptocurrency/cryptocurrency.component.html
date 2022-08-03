@@ -1,25 +1,41 @@
 <app-header></app-header>
-<h3>Choose Country</h3>
-<pre>
-    {{cryptoForm.value | json}}
-</pre>
 
-<form [formGroup]="cryptoForm" (ngSubmit)="search()">
-  <select formControlName="country">
-    <option [ngValue]="null" disabled>Select Country</option>
-    <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
-  </select>
+<div class="wrapper-search-form d-flex d-all-center">
+  
+  <div class="title">
+    <h1>Gestión Criptomonedas</h1>
+  </div>
 
-  <button [disabled]="cryptoForm.invalid" class="btn-primary">Buscar</button>
-</form>
+  <div class="search-form"> 
+    <form [formGroup]="cryptoForm" (ngSubmit)="search()" class="form d-flex">
+      <div class="form-input">
+        <select formControlName="country" class="form-select">
+          <option [ngValue]="null" disabled>Seleccione un País</option>
+          <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
+        </select>
+      </div>
+      <div class="form-input">
+        <button [disabled]="cryptoForm.invalid" class="btn-primary">Buscar</button>
+      </div>
+    </form> 
+  </div>
 
-<div class="lista">
-    <table *ngIf="cryptos">
-        <tr *ngFor="let t of cryptos">
-          <th>{{ t.id }}</th>
-          <th>{{ t.symbol }}</th>
-          <th>{{ t.name }}</th>
-          <th>{{ t.exchangeRate }}</th>
+  <div class="list-table">
+    <table class="table" *ngIf="cryptos">
+      <thead>
+        <th style="width:5%">ID</th>
+        <th style="width:30%">Simbolo</th>
+        <th style="width:30%">Nombre</th>
+        <th style="width:20%">Valor</th>  
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of cryptos">       
+          <td>{{ t.id }}</td>
+          <td>{{ t.symbol }}</td>
+          <td>{{ t.name }}</td>
+          <td>{{ t.exchangeRate | currency: 'USD'}}</td>
         </tr>
-      </table>
+      </tbody>
+    </table>
+  </div>  
 </div>

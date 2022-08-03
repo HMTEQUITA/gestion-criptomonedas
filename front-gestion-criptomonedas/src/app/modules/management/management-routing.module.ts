@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ValidateSessionGuard } from '@core/guards/validate-session.guard';
 import { CryptocurrencyComponent } from './components/cryptocurrency/cryptocurrency.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { ExchangeComponent } from './components/exchange/exchange.component';
@@ -12,15 +13,18 @@ const routes: Routes = [
   },
   {
     path:'customer',
-    component:CustomerComponent
+    component:CustomerComponent,
+    canActivate:[ValidateSessionGuard]
   },
   {
     path:'exchange',
-    component:ExchangeComponent
+    component:ExchangeComponent,
+    canActivate:[ValidateSessionGuard]
   },
   {
     path:'cryptocurrency',
-    component:CryptocurrencyComponent
+    component:CryptocurrencyComponent,
+    canActivate:[ValidateSessionGuard]
   }
 ];
 

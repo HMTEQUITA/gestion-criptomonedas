@@ -1,24 +1,39 @@
 <app-header></app-header>
-<h3>Choose Country</h3>
-<pre>
-    {{exchangeForm.value | json}}
-</pre>
 
-<form [formGroup]="exchangeForm" (ngSubmit)="search()">
-  <select formControlName="country">
-    <option [ngValue]="null" disabled>Select Country</option>
-    <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
-  </select>
+<div class="wrapper-search-form d-flex d-all-center">
+  
+  <div class="title">
+    <h1>Gestión Plataformas</h1>
+  </div>
 
-  <button [disabled]="exchangeForm.invalid" class="btn-primary">Buscar</button>
-</form>
+  <div class="search-form"> 
+    <form [formGroup]="exchangeForm" (ngSubmit)="search()" class="form d-flex">
+      <div class="form-input">
+        <select formControlName="country" class="form-select">
+          <option [ngValue]="null" disabled>Seleccione un País</option>
+          <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
+        </select>
+      </div>
+      <div class="form-input">
+        <button [disabled]="exchangeForm.invalid" class="btn-primary">Buscar</button>
+      </div>
+    </form> 
+  </div>
 
-<div class="lista">
-    <table *ngIf="exchanges">
-        <tr *ngFor="let t of exchanges">
+  <div class="list-table">
+    <table class="table" *ngIf="exchanges">
+      <thead>
+        <th style="width:5%">ID</th>
+        <th style="width:70%">Nombre</th>
+        <th style="width:25%">Estado</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of exchanges">       
           <th>{{ t.id }}</th>
           <th>{{ t.name }}</th>
-          <th>{{ t.status }}</th>
+          <th>{{ t.status ? 'Activa' : 'Inactiva'}}</th>
         </tr>
-      </table>
+      </tbody>
+    </table>
+  </div>  
 </div>

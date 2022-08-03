@@ -13,7 +13,6 @@ export class AddcryptoService {
 
   private URL = environment.api;
 
-  
   public payload:number = 0;
   
   private _showModal$ = new BehaviorSubject<boolean>(false);
@@ -45,17 +44,14 @@ export class AddcryptoService {
   }
 
   public addCrypto(cryptoId:number):Observable<any>{
-   // console.log('save', this.payload)
-   // return this.customerService.addCrypto(this.payload, cryptoId);
-    
-    return this.httpClient.get<CustomerInterface>( `${this.URL}/customers/${this.payload}/cryptocurrency/${cryptoId}`)
+    return this.httpClient.get<CustomerInterface>( `${this.URL}/customers/${this.payload}/add_cryptocurrency/${cryptoId}`)
     .pipe(
       catchError(this.handleError<any>('getCrypto',))
     );
   }
 
-  public addCrypto2(idCustomer:number, idCrypto:number): Observable<CustomerInterface> {
-    return this.httpClient.get<CustomerInterface>( `${this.URL}/customers/${idCustomer}/cryptocurrency/${idCrypto}`)
+  public removeCrypto(cryptoId:number): Observable<CustomerInterface> {
+    return this.httpClient.get<CustomerInterface>(`${this.URL}/customers/${this.payload}/remove_cryptocurrency/${cryptoId}`)
       .pipe(
         catchError(this.handleError<CustomerInterface>('getCrypto',))
       );

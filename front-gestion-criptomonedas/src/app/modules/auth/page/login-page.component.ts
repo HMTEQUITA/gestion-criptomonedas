@@ -15,7 +15,7 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required /*Validators.email*/]),
+      email: new FormControl('', [Validators.required/*, Validators.email*/]),
       password: new FormControl('', [Validators.required])
     })
   }
@@ -26,9 +26,6 @@ export class LoginPageComponent implements OnInit {
     .subscribe((response) => {
       this.router.navigate(['/','management'])
     })
-    console.log(body)
   }
-
-  
 
 }

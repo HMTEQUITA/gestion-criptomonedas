@@ -24,9 +24,15 @@ export class AuthService {
          })
         }),
         catchError(() => {
-         console.log('Algo ocurrio?? fijate')
+         console.log('Error login')
          return of([])
        })
       )
    }
+
+   logout():boolean{
+    this.cookieService.remove('token_session');   
+
+    return !this.cookieService.get('token_session');
+  }
 }

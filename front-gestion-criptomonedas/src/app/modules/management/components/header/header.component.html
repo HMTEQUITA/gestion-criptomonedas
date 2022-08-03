@@ -1,26 +1,21 @@
 
 <div class="navbar">
     <div class="d-flex logo-section d-all-center">
-        <div class="logo" [routerLink]="['/','auth','login']">
-         
+        <div  [routerLink]="['/','management']">
+            <img class="logo" src ="../../../../../assets/icons/banano-ban-logo.png">
         </div>
         <div class="menu">
             <ul>
-                <li 
-                *ngFor="let item of menu">
-                   <a [routerLink]="[item.path]">{{item.name}}</a>
+                <li *ngFor="let item of menu" routerLinkActive="active-link">
+                   <a class="header-menu_link" [routerLink]="item.path" >{{item.name}}</a>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="d-flex d-all-center user-section">
-
-        <div class="notifications">
-            <span class="count">5</span>
-            <i class="uil uil-bell"></i>
+        <div class="logout" (click)="logout()">
+            <a class="header-menu_link" >
+                <img class="icon-logout" src ="../../../../../assets/icons/salida.png">
+            </a>       
+            <span>Salir</span>
         </div>
-        <div class="avatar d-all-center d-flex">
-            <img src="https://avatars.githubusercontent.com/u/15802366?v=4" alt="">
-        </div>
-    </div>
 </div>

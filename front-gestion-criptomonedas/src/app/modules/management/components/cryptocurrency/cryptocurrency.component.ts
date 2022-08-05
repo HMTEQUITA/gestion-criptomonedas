@@ -34,7 +34,6 @@ export class CryptocurrencyComponent implements OnInit {
   
   search():void{
     const body = this.cryptoForm.value;
-
     if(body.country.name === 'Todos'){
       this.cryptoService.getCryptos().subscribe((response) => {
         this.cryptos = response;
@@ -44,7 +43,6 @@ export class CryptocurrencyComponent implements OnInit {
         this.cryptos = response;
       })
     }
-    console.log(body)
   }
 
 }

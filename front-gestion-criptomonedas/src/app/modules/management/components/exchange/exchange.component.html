@@ -28,10 +28,10 @@
         <th style="width:25%">Estado</th>
       </thead>
       <tbody>
-        <tr *ngFor="let t of exchanges">       
-          <th>{{ t.id }}</th>
-          <th>{{ t.name }}</th>
-          <th>{{ t.status ? 'Activa' : 'Inactiva'}}</th>
+        <tr *ngFor="let t of exchanges | orderBy:'id'">       
+          <td>{{ t.id }}</td>
+          <td>{{ t.name }}</td>
+          <td>{{ t.status ? 'Activa' : 'Inactiva'}}</td>
         </tr>
       </tbody>
     </table>

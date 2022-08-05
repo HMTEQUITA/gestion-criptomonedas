@@ -29,7 +29,8 @@
         <th style="width:20%">Valor</th>  
       </thead>
       <tbody>
-        <tr *ngFor="let t of cryptos">       
+        
+        <tr *ngFor="let t of cryptos | orderBy:'id'">       
           <td>{{ t.id }}</td>
           <td>{{ t.symbol }}</td>
           <td>{{ t.name }}</td>

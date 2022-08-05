@@ -30,7 +30,7 @@
         <th style="width:5%">Editar</th>
       </thead>
       <tbody>
-        <tr *ngFor="let t of customers">       
+        <tr *ngFor="let t of customers | orderBy:'id'">       
           <td>{{ t.id }}</td>
           <td>{{ t.name }}</td>
           <td>{{ t.surname }}</td>

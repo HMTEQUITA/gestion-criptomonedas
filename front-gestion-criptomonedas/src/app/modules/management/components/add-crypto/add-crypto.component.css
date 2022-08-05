@@ -49,6 +49,9 @@
     justify-content: left;
     width: 90%;
 }
+.datail-customer .list-table {
+    width: 90%;
+}
 
 .addcrypto-form{
     width: 50%;

@@ -24,7 +24,7 @@
                     <th style="width:5%">Eliminar</th>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let t of customer.cryptocurrencies">       
+                    <tr *ngFor="let t of customer.cryptocurrencies | orderBy:'id'">       
                         <td>{{ t.id }}</td>
                         <td>{{ t.symbol }}</td>
                         <td>{{ t.name }}</td>

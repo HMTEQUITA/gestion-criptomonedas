@@ -13,15 +13,15 @@ export class HeaderComponent implements OnInit {
 
   menu: Array<{name:string, path:string}> = [
     {
-      name:'Customers',
+      name:'Clientes',
       path:'/management/customer'
     },
     {
-      name:'Cryptocurrencies',
+      name:'Criptomonedas',
       path:'/management/cryptocurrency'
     },
     {
-      name:'Exchanges',
+      name:'Plataformas',
       path:'/management/exchange'
     }
   ]

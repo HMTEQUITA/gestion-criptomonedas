@@ -10,6 +10,7 @@ import { ExchangeComponent } from './components/exchange/exchange.component';
 import { CryptocurrencyComponent } from './components/cryptocurrency/cryptocurrency.component';
 import { AddCryptoComponent } from './components/add-crypto/add-crypto.component';
 import { HomeComponent } from './components/home/home/home.component';
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { HomeComponent } from './components/home/home/home.component';
     CommonModule,
     ReactiveFormsModule,
     ManagementRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class ManagementModule { }
